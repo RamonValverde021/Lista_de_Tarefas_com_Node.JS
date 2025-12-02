@@ -1,5 +1,6 @@
 import { isCancel, outro, select } from "@clack/prompts";
 import { createTaskMenu } from "../menus/create.js";
+import { listTasksMenu } from "./list.js";
 
 export async function mainMenu() {
 
@@ -20,6 +21,7 @@ export async function mainMenu() {
             createTaskMenu();
             break;
         case "list":
+            listTasksMenu();
             break;
         case "exit":
             break;

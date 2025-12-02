@@ -4,4 +4,3 @@ import { mainMenu } from "./menus/main.js";
 
 intro(`${chalk('📋 Lista de Tarefas')}`);
 mainMenu();
-
