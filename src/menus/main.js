@@ -9,9 +9,9 @@ export async function mainMenu() {
         message: "Selecione uma opção", // Mensagem do menu
         // Lista de opções disponíveis
         options: [
-            { value: "create", label: "Adicionar tarefa" }, // Opção para adicionar tarefa
-            { value: "list", label: "Listar tarefas" },     // Opção para listar tarefas
-            { value: "exit", label: "Sair" },               // Opção para sair do programa
+            { label: "Adicionar tarefa", value: "create" }, // Opção para adicionar tarefa
+            { label: "Listar tarefas", value: "list" },     // Opção para listar tarefas
+            { label: "Sair", value: "exit" }                // Opção para sair do programa
         ]
     });
 

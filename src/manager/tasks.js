@@ -8,14 +8,14 @@ if (!existsSync(filePath)) {                                  // Verifica se o a
     writeFileSync(filePath, JSON.stringify([]), "utf-8");     // Se não existir, cria o arquivo com um array vazio
 }
 
-const data = readFileSync(filePath, "utf-8");                 // Lê o conteúdo do arquivo de tarefas
+const data = readFileSync(filePath, "utf-8");                 // Lê o conteúdo do arquivo de tarefas - Retorna uma String
 const parsed = JSON.parse(data);                              // Faz o parse do conteúdo JSON para um objeto JavaScript
 const tasks = new Map(parsed.map(task => [task.name, task])); // Cria um Map com as tarefas, usando o nome da tarefa como chave
 
 // Exporta o objeto taskManager com métodos para gerenciar tarefas
 export const taskManager = {
     // A coleção de tarefas
-    tasks,
+    tasks,  // tasks:tasks
     // Método para salvar as tarefas no arquivo
     save() {
         const data = this.toArray();                                     // Converte o Map de tarefas para um array

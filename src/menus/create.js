@@ -5,7 +5,6 @@ import { mainMenu } from "./main.js";                 // Importa a função do m
 // Função assíncrona para exibir o menu de criação de tarefas
 export async function createTaskMenu() {
     let name; // Declara a variável para armazenar o nome da tarefa
-
     // Loop para garantir que o nome da tarefa seja único
     do {
         // Solicita ao usuário o nome da tarefa
@@ -24,17 +23,31 @@ export async function createTaskMenu() {
         return;     // Encerra a função
     }
 
-    // Solicita ao usuário a descrição da tarefa
-    const description = await text({
-        message: "Digite a descrição da tarefa" // Mensagem exibida ao usuário
-    });
+    let description; // Declara a variável para armazenar a descrição da tarefa
+    // Loop para garantir que a descrição da tarefa seja única
+    do {
+        // Solicita ao usuário a descrição da tarefa
+        description = await text({
+            message: "Digite a descrição da tarefa", // Mensagem exibida ao usuário
+        });
+        // Verifica se já existe uma tarefa com essa descrição
+        if (taskManager.tasks.has(description)) {
+            log.error("Descrição ja existe!"); // Exibe mensagem de erro se a descrição já existir
+        }
+    } while (taskManager.tasks.has(description)); // Continua o loop enquanto a descrição da tarefa já existir
+
+    // Verifica se o usuário cancelou a operação
+    if (isCancel(description)) {
+        createTaskMenu(); // Retorna ao menu de criação
+        return;           // Encerra a função
+    }
 
     // Cria o objeto da nova tarefa
     const task = {
-        name,                               // Nome da tarefa
-        description,                        // Descrição da tarefa
-        status: "em andamento",             // Status inicial da tarefa
-        createdAt: new Date().toISOString() // Data de criação da tarefa
+        name,                                  // Nome da tarefa
+        description,                           // Descrição da tarefa
+        status: "em andamento",                // Status inicial da tarefa
+        createdAt: new Date().toISOString()    // Data de criação da tarefa
     }
 
     taskManager.create(task);                  // Adiciona a tarefa ao gerenciador
